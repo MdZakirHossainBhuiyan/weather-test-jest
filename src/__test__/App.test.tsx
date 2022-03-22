@@ -1,32 +1,34 @@
-import { render, waitFor } from "@testing-library/react";
 import axios from "axios";
 import App from "../App";
-import { elementFinder, renderWithMemoryRouter, textExpecter, textFinderRx } from "../Utilities/testUtilities";
+import {
+    elementFinder,
+    renderWithMemoryRouter,
+    textExpecter,
+    textFinderRx,
+} from "../Utilities/testUtilities";
 
 describe("App Router", () => {
     beforeEach(() => {
         jest.spyOn(axios, "get").mockResolvedValue({
-            data: 0,
+            data: { hits: 0 },
         });
     });
 
     test("should render Home Page '/'", async () => {
-        render(<App />)
+        renderWithMemoryRouter("/", <App />);
 
         textExpecter("Submit");
-        // await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
-    })
-
-    test("should render CountryInfo page with country Name", async () => {
-        renderWithMemoryRouter("/countryInfo/bangladesh", <App />)
-    
-        await elementFinder("countryInfoTitle");
-        await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
     });
 
-    // test("should render NotFound page on invalid route", async () => {
-    
-    //     await textFinderRx("page Not Found");
-    // });
+    test("Should go to '/countryInfo/BD' from App", async () => {
+        renderWithMemoryRouter("/countryInfo/BD", <App />);
 
-})
+        await elementFinder("countryInfoTitle");
+    });
+
+    test("should render NotFound page on invalid route", async () => {
+        renderWithMemoryRouter("/invalidRoute", <App />);
+
+        await textFinderRx("page Not Found");
+    });
+});

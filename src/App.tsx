@@ -10,7 +10,6 @@ import CountryInfo from './Components/CountryInfo/CountryInfo';
 
 function App() {
   return (
-    <Router>
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -22,7 +21,6 @@ function App() {
           <p>page Not Found</p>
         </Route>
       </Switch>
-    </Router>
   );
 }
 
