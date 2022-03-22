@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "../Components/Home/Home";
 import {
     elementFinder,
@@ -20,8 +20,31 @@ describe("Home page", () => {
         await elementFinder("homePageInput");
     });
 
-    test("should button is disable", () => {
+    test("should check if button is disable", () => {
         const { getByText } = render(<Home />);
-        expect(getByText("submit").closest('button')).toHaveAttribute('disabled');
+        expect(getByText(/Submit/i).closest('button')).toHaveAttribute('disabled');
     })
+
+    const setup = () => {
+        const utils = render(<Home />)
+        const input = utils.getByLabelText('Enter country')
+        return {
+          input,
+          ...utils,
+        }
+    }
+
+    test('should input field have value', () => {
+        const {input} = setup()
+        fireEvent.change(input, {target: {value: 'BD'}})
+        expect(input.value).toBe('BD')
+    })
+      
+    // test('Test click event', () => {
+    //     const mockCallBack = jest.fn();
+      
+    //     const button = render(<button onClick={mockCallBack}>Submit</button>);
+    //     button.getByTestId('button').simulate('click');
+    //     expect(mockCallBack.mock.calls.length).toEqual(1);
+    // });
 });

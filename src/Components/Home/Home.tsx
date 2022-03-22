@@ -18,8 +18,8 @@ const Home = () => {
     return (
         <Container style={{textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
             <h1 data-testid="homePageTitle">Country Info</h1>
-            <TextField data-testid="homePageInput" onChange={handleInputChange} id="outlined-basic" label="Country Name" variant="outlined" />
-            <button onClick={handleSubmit} className={searchValue ? 'submitButtonActive' : 'submitButtonDisable'}>Submit</button>
+            <TextField value={searchValue} data-testid="homePageInput" onChange={handleInputChange} id="outlined-basic" label="Enter country" variant="outlined" />
+            <button disabled={!searchValue} onClick={handleSubmit} className={searchValue ? 'submitButtonActive' : 'submitButtonDisable'}>Submit</button>
         </Container>
     );
 };
