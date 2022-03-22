@@ -1,0 +1,31 @@
+.submitButtonActive{
+    width: 200px;
+    height: 35px;
+    border: none;
+    background-color: blue;
+    color: white;
+    margin-top: 20px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.submitButtonDisable{
+    width: 200px;
+    height: 35px;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    border-radius: 7px;
+}
+
+.weatherButton{
+    width: 200px;
+    height: 35px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: blue;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
