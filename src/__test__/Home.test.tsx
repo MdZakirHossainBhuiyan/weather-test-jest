@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import CountryInfo from "../Components/CountryInfo/CountryInfo";
 import Home from "../Components/Home/Home";
 import {
+    buttonClickerAsync,
     elementFinder,
     renderWithMemoryRouter,
 } from "../Utilities/testUtilities";
@@ -25,26 +27,28 @@ describe("Home page", () => {
         expect(getByText(/Submit/i).closest('button')).toHaveAttribute('disabled');
     })
 
-    const setup = () => {
-        const utils = render(<Home />)
-        const input = utils.getByLabelText('Enter country')
-        return {
-          input,
-          ...utils,
-        }
-    }
+    test("should input field have value", () => {
+        const comp = renderWithMemoryRouter("/", <Home />);
 
-    test('should input field have value', () => {
-        const {input} = setup()
-        fireEvent.change(input, {target: {value: 'BD'}})
-        expect(input.value).toBe('BD')
-    })
+        const input = comp.getByLabelText("Enter country") as HTMLInputElement;
+
+        fireEvent.change(input, { target: { value: "BD" } });
+
+        expect(input.value).toBe("BD");
+    });
       
-    // test('Test click event', () => {
-    //     const mockCallBack = jest.fn();
-      
-    //     const button = render(<button onClick={mockCallBack}>Submit</button>);
-    //     button.getByTestId('button').simulate('click');
-    //     expect(mockCallBack.mock.calls.length).toEqual(1);
+    // test('Test click event', async () => {
+    //     const comp = renderWithMemoryRouter("/", <Home />);
+
+    //     const input = comp.getByLabelText("Enter country") as HTMLInputElement;
+
+    //     fireEvent.change(input, { target: { value: "BD" } });
+
+    //     expect(input.value).toBe("BD");
+
+    //     // renderWithMemoryRouter("/", <Home />);
+
+    //     await buttonClickerAsync("Submit?", 0);
+    //     await elementFinder("countryInfoTitle");
     // });
 });

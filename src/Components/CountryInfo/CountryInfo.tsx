@@ -14,7 +14,7 @@ interface CountryInfoInterface {
         svg: string
     },
     capital: string,
-    population: string,
+    population: number,
     latlng: number[],
 }
 
@@ -32,8 +32,6 @@ const CountryInfo = () => {
     const [weatherLoading, setWeatherLoading] = useState<boolean>(false);
 
     const [weatherInfo, setWeatherInfo] = useState<WeatherInfoInterface>();
-
-    console.log('weather', countryInfo);
 
     useEffect(() => {
         getData();
@@ -95,7 +93,7 @@ const CountryInfo = () => {
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
-                                        <h6>Capital: {countryInfo?.capital}</h6>
+                                        <h6 data-testid="capitalName">Capital: {countryInfo?.capital}</h6>
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
                                         Population: {countryInfo?.population} <br />
@@ -108,7 +106,7 @@ const CountryInfo = () => {
                     }
 
                     {
-                        countryInfo && <button onClick={handleCapitalWeather} className='weatherButton'>Capital Weather</button>
+                        countryInfo && <button data-testid="weatherButton" onClick={handleCapitalWeather} className='weatherButton'>Capital Weather</button>
                     }
 
                     {
