@@ -27,18 +27,18 @@ describe("country info page", () => {
       await elementFinder("countryInfoTitle");
     });
 
-    // test("should render actual country info upon data arrival", async () => {
-    //   await act(async () => {
-    //     renderWithMemoryRouter("/countryInfo/bangladesh", <CountryInfo />
-    //         // <MemoryRouter>
-    //         //     <Switch>
-    //         //         <CountryInfo />
-    //         //     </Switch>
-    //         // </MemoryRouter>
-    //     );
-    //   });
-    //   await elementFinder("capitalName");
-    // });
+    test("should render actual country info upon data arrival", async () => {
+      await act(async () => {
+        renderWithMemoryRouter("/countryInfo/bangladesh", <CountryInfo />
+            // <MemoryRouter>
+            //     <Switch>
+            //         <CountryInfo />
+            //     </Switch>
+            // </MemoryRouter>
+        );
+      });
+      await elementFinder("capitalName");
+    });
 
     // test("should initially render header of component", async () => {
     //   renderWithMemoryRouter("/countryInfo/bangladesh", <CountryInfo />);
