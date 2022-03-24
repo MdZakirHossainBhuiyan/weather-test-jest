@@ -30,6 +30,7 @@ const CountryInfo = () => {
     const [countryInfo, setCountryInfo] = useState<CountryInfoInterface>();
     const [loading, setLoading] = useState<boolean>(false);
     const [weatherLoading, setWeatherLoading] = useState<boolean>(false);
+    const [showWeatherInfo, setShowWeatherInfo] = useState<boolean>(false)
 
     const [weatherInfo, setWeatherInfo] = useState<WeatherInfoInterface>();
 
@@ -57,6 +58,7 @@ const CountryInfo = () => {
     const handleCapitalWeather = () => {
         try{
             setWeatherLoading(true);
+            setShowWeatherInfo(true);
 
             axios.get(`http://api.weatherstack.com/current?access_key=e6c02155534d93af34a954cb6c1faccb&query=${countryInfo?.capital}`)
             .then(response => {
@@ -80,9 +82,8 @@ const CountryInfo = () => {
                 <Box>
                     <CircularProgress size={20} />
                 </Box> : 
+                
                 <div style={{"marginBottom": "50px"}}>
-                    {
-                        countryInfo ? 
                         <Card sx={{ maxWidth: 200 }}>
                             <CardActionArea>
                                 <CardMedia
@@ -102,11 +103,10 @@ const CountryInfo = () => {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card> : <p>No data found</p>
-                    }
+                        </Card> 
 
                     {
-                        countryInfo && <button data-testid="weatherButton" onClick={handleCapitalWeather} className='weatherButton'>Capital Weather</button>
+                        <button data-testid="weatherButton" onClick={handleCapitalWeather} className='weatherButton'>Capital Weather</button>
                     }
 
                     {
@@ -114,7 +114,7 @@ const CountryInfo = () => {
                         <Box>
                             <CircularProgress size={20} />
                         </Box> : 
-                        weatherInfo && 
+                        weatherInfo ?
                         <Card sx={{ maxWidth: 200 }}>
                             <CardActionArea>
                                 <CardMedia
@@ -125,14 +125,14 @@ const CountryInfo = () => {
                                     alt="green iguana"
                                 />
                                 <CardContent>
-                                    <Typography variant="body2" color="text.secondary">
+                                    <Typography data-testid="weatherInformationTest" variant="body2" color="text.secondary">
                                         Temperature: {weatherInfo?.temperature}<sup>o</sup> <br />
                                         Wind Speed: {weatherInfo?.wind_speed} <br />
                                         Precip: {weatherInfo?.precip}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card>
+                        </Card> : <p data-testid="weatherInformationTest"></p>
                     }
                 </div>
             }
