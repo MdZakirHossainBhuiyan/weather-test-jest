@@ -1,5 +1,5 @@
 import CountryInfo from "../Components/CountryInfo/CountryInfo";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { elementFinder, renderWithMemoryRouter } from "../Utilities/testUtilities";
 import { BrowserRouter, MemoryRouter, Switch } from "react-router-dom";
@@ -26,10 +26,22 @@ describe("country info page", () => {
 
     test("should render actual country info upon data arrival", async () => {
       await act(async () => {
-        renderWithMemoryRouter("/countryInfo/bangladesh", <CountryInfo />
+        renderWithMemoryRouter("/countryInfo/bangladesh", <App />
         );
       });
-      await elementFinder("capitalName");
+      await waitFor(() => {
+        elementFinder("capitalName");
+      })
+    });
+
+    test("should render actual country info upon data arrival", async () => {
+      await act(async () => {
+        renderWithMemoryRouter("/countryInfo/bangladesh", <App />
+        );
+      });
+      await waitFor(() => {
+        elementFinder("dataNotFound");
+      })
     });
 
     test("should show weather button", async () => {
@@ -37,17 +49,19 @@ describe("country info page", () => {
         renderWithMemoryRouter("/countryInfo/bangladesh", <App />
         );
       });
-  
-      await elementFinder("weatherButton");
+      
+      await waitFor(() => {
+        elementFinder("weatherButton");
+      })
     });
 
     jest.spyOn(axios, "get").mockResolvedValue({
-      data: {
+        data: [{
             weather_icons: ['https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png'],
             temperature: 28,
             wind_speed: 16,
             precip: 0,
-        },
+        }],
     });
 
     test("should show weather information of capital", async () => {
@@ -55,7 +69,9 @@ describe("country info page", () => {
         renderWithMemoryRouter("/countryInfo/bangladesh", <App />
         );
       });
-  
-      await elementFinder("weatherInformationTest");
+
+      await waitFor(() => {
+        elementFinder("weatherInformationTest");
+      })
     });
 })
