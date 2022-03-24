@@ -74,16 +74,18 @@ const CountryInfo = () => {
     }
 
     return (
-        <Container style={{"display": "flex", "flexDirection": "column", "alignItems": "center"}}>
-            <h1 data-testid="countryInfoTitle">Information of {countryName}</h1>
+        <>
+            <h1 data-testid="countryInfoTitle" style={{"textAlign": "center"}}>Information of {countryName}</h1>
 
             {
                 loading ? 
                 <Box>
                     <CircularProgress size={20} />
                 </Box> : 
-                
-                <div style={{"marginBottom": "50px"}}>
+                <div style={{"marginBottom": "50px", "display": "flex", "flexDirection": "column", "alignItems": "center"}}>
+
+                    {
+                        countryInfo ?
                         <Card sx={{ maxWidth: 200 }}>
                             <CardActionArea>
                                 <CardMedia
@@ -103,7 +105,8 @@ const CountryInfo = () => {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card> 
+                        </Card> : <p data-testid="capitalName">No data Found</p>
+                    }
 
                     {
                         <button data-testid="weatherButton" onClick={handleCapitalWeather} className='weatherButton'>Capital Weather</button>
@@ -136,7 +139,7 @@ const CountryInfo = () => {
                     }
                 </div>
             }
-        </Container>
+        </>
     );
 };
 

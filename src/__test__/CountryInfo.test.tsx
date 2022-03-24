@@ -12,7 +12,7 @@ describe("country info page", () => {
               flags:{
                   svg: "https://flagcdn.com/bd.svg",
               },
-              capital: ["Dhaka"],
+              capital: "Dhaka",
               population: 164689383,
               latlng: [24, 90],
         },
