@@ -17,7 +17,7 @@ describe("App Router", () => {
     test("should render Home Page '/'", async () => {
         renderWithMemoryRouter("/", <App />);
 
-        textExpecter("Submit");
+        await textExpecter("Submit");
     });
 
     test("Should go to '/countryInfo/BD' from App", async () => {

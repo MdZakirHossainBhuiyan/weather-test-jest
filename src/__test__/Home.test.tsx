@@ -1,8 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import CountryInfo from "../Components/CountryInfo/CountryInfo";
 import Home from "../Components/Home/Home";
 import {
-    buttonClickerAsync,
     elementFinder,
     renderWithMemoryRouter,
 } from "../Utilities/testUtilities";
@@ -36,19 +34,4 @@ describe("Home page", () => {
 
         expect(input.value).toBe("BD");
     });
-      
-    // test('Test click event', async () => {
-    //     const comp = renderWithMemoryRouter("/", <Home />);
-
-    //     const input = comp.getByLabelText("Enter country") as HTMLInputElement;
-
-    //     fireEvent.change(input, { target: { value: "BD" } });
-
-    //     expect(input.value).toBe("BD");
-
-    //     // renderWithMemoryRouter("/", <Home />);
-
-    //     await buttonClickerAsync("Submit?", 0);
-    //     await elementFinder("countryInfoTitle");
-    // });
 });

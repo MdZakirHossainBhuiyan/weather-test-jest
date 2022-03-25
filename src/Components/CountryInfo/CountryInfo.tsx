@@ -30,7 +30,6 @@ const CountryInfo = () => {
     const [countryInfo, setCountryInfo] = useState<CountryInfoInterface>();
     const [loading, setLoading] = useState<boolean>(false);
     const [weatherLoading, setWeatherLoading] = useState<boolean>(false);
-    const [showWeatherInfo, setShowWeatherInfo] = useState<boolean>(false)
     const [weatherInfo, setWeatherInfo] = useState<WeatherInfoInterface>();
 
     useEffect(() => {
@@ -57,7 +56,6 @@ const CountryInfo = () => {
     const handleCapitalWeather = async () => {
         try{
             setWeatherLoading(true);
-            setShowWeatherInfo(true);
 
             await axios.get(`http://api.weatherstack.com/current?access_key=e6c02155534d93af34a954cb6c1faccb&query=${countryInfo?.capital}`)
             .then(response => {
