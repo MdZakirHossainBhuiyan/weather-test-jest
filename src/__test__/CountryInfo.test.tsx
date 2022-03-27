@@ -24,23 +24,23 @@ describe("country info page", () => {
       await elementFinder("countryInfoTitle");
     });
 
-    test("should render actual country info upon data arrival", async () => {
+    test("should render actual country info data arrival", async () => {
       await act(async () => {
         renderWithMemoryRouter("/countryInfo/bangladesh", <App />
         );
       });
-      await waitFor(() => {
-        elementFinder("capitalName");
+      waitFor(() => {
+        expect(screen.getByTestId("capitalName")).toBeInTheDocument();
       })
     });
 
-    test("should render actual country info upon data arrival", async () => {
+    test("should render when actual country info data not arrival", async () => {
       await act(async () => {
         renderWithMemoryRouter("/countryInfo/bangladesh", <App />
         );
       });
-      await waitFor(() => {
-        elementFinder("dataNotFound");
+      waitFor(() => {
+        expect(screen.getByTestId("dataNotFound")).toBeInTheDocument();
       })
     });
 
@@ -50,8 +50,8 @@ describe("country info page", () => {
         );
       });
       
-      await waitFor(() => {
-        elementFinder("weatherButton");
+      waitFor(() => {
+        expect(screen.getByTestId("weatherButton")).toBeInTheDocument();
       })
     });
 
@@ -70,8 +70,8 @@ describe("country info page", () => {
         );
       });
 
-      await waitFor(() => {
-        elementFinder("weatherInformationTest");
+      waitFor(() => {
+        expect(screen.getByTestId("weatherInformationTest")).toBeInTheDocument();
       })
     });
 })

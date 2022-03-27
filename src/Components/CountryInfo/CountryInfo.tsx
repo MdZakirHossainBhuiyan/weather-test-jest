@@ -76,8 +76,8 @@ const CountryInfo = () => {
 
             {
                 loading ? 
-                <Box>
-                    <CircularProgress style={{"textAlign": "center"}} size={20} />
+                <Box style={{"textAlign": "center"}}>
+                    <CircularProgress size={20} />
                 </Box> : 
                 <div style={{"marginBottom": "50px", "display": "flex", "flexDirection": "column", "alignItems": "center"}}>
 
