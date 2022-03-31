@@ -1,8 +1,7 @@
 import CountryInfo from "../Components/CountryInfo/CountryInfo";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { elementFinder, renderWithMemoryRouter } from "../Utilities/testUtilities";
-import { BrowserRouter, MemoryRouter, Switch } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 import App from "../App";
 

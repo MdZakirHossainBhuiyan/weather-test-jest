@@ -27,7 +27,3 @@ export const textFinderRx = async (text: string) => {
       await screen.findByText(new RegExp(text), {}, { timeout: 1000 })
     ).toBeInTheDocument();
 };
-
-export const buttonClickerAsync = async (button: string, btnNumber: number) => {
-  userEvent.click(await screen.findByText(button), { button: btnNumber });
-};

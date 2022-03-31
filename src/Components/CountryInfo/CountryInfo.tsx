@@ -33,25 +33,22 @@ const CountryInfo = () => {
     const [weatherInfo, setWeatherInfo] = useState<WeatherInfoInterface>();
 
     useEffect(() => {
+        const getData = async () => {
+            try{
+                setLoading(true);
+                return await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
+                .then(response => {
+                    const data = response.data[0];
+                    setCountryInfo(data);
+                    setLoading(false);
+                })
+                
+            }catch(error){
+                setLoading(false);
+            }
+        };
         getData();
     },[countryName])
-
-    const getData = async () => {
-
-        try{
-            setLoading(true);
-            await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
-            .then(response => {
-                const data = response.data[0];
-                setCountryInfo(data);
-            })
-
-            setLoading(false);
-
-        }catch(error){
-            setLoading(false);
-        }
-    }
 
     const handleCapitalWeather = async () => {
         try{
